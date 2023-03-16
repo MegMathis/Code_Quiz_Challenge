@@ -8,4 +8,18 @@ button {
   padding: 5px;
   margin: 10px;
   border-radius: 5px;
+  background-color: purple;
+  color: white;
+}
+
+#start:hover {
+  background-color: pink;
+  cursor: pointer;
+  color: black;
+}
+
+#view-score:hover {
+  background-color: pink;
+  cursor: pointer;
+  color: black;
 }

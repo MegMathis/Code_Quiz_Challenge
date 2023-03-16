@@ -114,17 +114,17 @@ var renderQuestion = function (question) {
 var currentQuestionIndex = 0;
 var userScore = 0;
 var correctAnswer = questions[currentQuestionIndex].correct;
-var clickScores = document.getElementById("view-score");
+var clickViewScores = document.getElementById("view-score");
 
 var answerClick = function (event) {
   event.preventDefault();
   var userAnswer = event.target.textContent;
   correctAnswer = questions[currentQuestionIndex].correct;
-  console.log("userAnswer", userAnswer);
+  //   console.log("userAnswer", userAnswer);
 
   //   correct / incorrect
   var answerDetermination = document.querySelector("#answer-determination");
-  console.log(correctAnswer);
+  //   console.log(correctAnswer);
   if (userAnswer !== correctAnswer) {
     adjustTime(-10);
     answerDetermination.textContent = "Incorrect";
@@ -134,7 +134,7 @@ var answerClick = function (event) {
     } else {
       renderQuestion(questions[currentQuestionIndex]);
     }
-    console.log(userAnswer);
+    // console.log(userAnswer);
   } else if (userAnswer === correctAnswer) {
     currentQuestionIndex++;
     answerDetermination.textContent = "Correct";
@@ -195,10 +195,18 @@ function endQuizPage() {
   blank.appendChiild(submitInitialBtn);
 
   submitInitialBtn.addEventListener("click", () => {
+    if (initialBox.value.length === 0) return false;
     let storeInitials = (...input) => {
       let data = JSON.stringify({ name: input[0], score: input[1] });
     };
     storeInitials(initialBox.value, userScore);
+    var playAgain = document.createElement("button");
+    playAgain.textContent = "Play Again";
+    blank.appendChiild(playAgain);
+
+    playAgain.addEventListener("click", () => {
+      location.reload();
+    });
   });
 
   if (initialInput === "") {
