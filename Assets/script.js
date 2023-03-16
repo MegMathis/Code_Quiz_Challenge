@@ -146,3 +146,78 @@ var answerClick = function (event) {
     }
   }
 };
+
+var quiz = function (event) {
+  event.preventDefault();
+  resetDisplay();
+  renderQuestion(questions[currentQuestionIndex]);
+};
+
+function resetDisplay() {
+  questionContainer.innerHTML = "";
+  document.querySelector("#intro-page").style.display = "none";
+}
+
+function highScores() {
+  let data = localStorage.getItem("object");
+  let getData = JSON.parse(data);
+  let name = getData.name;
+  let score = getData.score;
+  questionContainer.innerHTML = "";
+  questionContainer.innerHTML = name + " " + score;
+}
+
+clickViewScores.addEventListener("click", () => {
+  highScores();
+});
+
+var initials;
+function endQuizPage() {
+  resetDisplay();
+  timerEl.textContent = "";
+  clearInterval(quizDuration);
+  var endPage = document.createElement("h2");
+  questionContainer.appendChild(endPage);
+
+  let blank = doument.querySelector("#answer-determination");
+  blank.innerHTML = "";
+
+  endPage.innerHTML =
+    "Finished!  Your final score is " +
+    userScore +
+    ". Enter you initials to save score.";
+
+  var intialBox = document.createElement("input");
+  blank.appendChiild(initialBox);
+
+  var submitIntialBtn = document.createElement("button");
+  submitIntialBtn.textContent = "Submit";
+  blank.appendChiild(submitInitialBtn);
+
+  submitInitialBtn.addEventListener("click", () => {
+    let storeInitials = (...input) => {
+      let data = JSON.stringify({ name: input[0], score: input[1] });
+    };
+    storeInitials(initialBox.value, userScore);
+  });
+
+  if (initialInput === "") {
+    var nullInitial = document.createElement("p");
+    nullInitial.textContent = "Please enter your initials";
+    return false;
+  } else {
+    displayMessage("saved", "saved successfully");
+  }
+  initialBox.reset();
+  document.querySelector("input").value = "";
+
+  initialBox.addEventListener("submt", endQuizPage);
+}
+
+function renderInitials() {
+  submitInitialBtn.addEventListener("click", function (event) {
+    event.preventDefault;
+  });
+}
+
+clickStart.addEventListener("click", quiz);
