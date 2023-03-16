@@ -1,14 +1,4 @@
-// When I click the start button
-
-// When I answer a question
-// I am presented with another question
-// When I answer a question incorrectly
-// Time is subtracted from the clock
-// When all questions are answered or the timer reaches 0
-// game is over
-// When the game is over
-// I can save my initials and my score
-
+// set up docs variables
 var questions = [
   {
     q: "Commonly used data types DO NOT include:",
@@ -54,31 +44,43 @@ var questions = [
 
 var clickStart = document.getElementById("start");
 var timerEl = document.getElementById("countdown");
-var timeLeft = 60;
+var count = 60;
+var h2 = document.querySelector("h2");
 var quizDuration;
 var questionContainer = document.querySelector("#quiz-container");
 
 // a timer is presented
-function timer() {
-  timerEl.textContent = "Time remaining: " + timeLeft + "s";
-  quizDuration = setInterval(function () {
-    if (timeLeft > 0) {
-      adjustTime(-1);
-    } else {
-      endQuizPage();
+// function timer() {
+//   timerEl.textContent = "Time remaining: " + timeLeft + "s";
+//   quizDuration = setInterval(function () {
+//     if (timeLeft > 0) {
+//       adjustTime(-1);
+//     } else {
+//       endQuizPage();
+//     }
+//   }, 1000);
+// }
+// function adjustTime(amount) {
+//   timeLeft += amount;
+//   if (timeleft < 0) {
+//     timeleft = 0;
+//   }
+//   timerEl.textContent = "Time remaining: " + timeLeft + "s";
+// }
+
+// timer starts when I click "start quiz"
+function startCountDown() {
+  var timer = setInterval(function () {
+    count--;
+    h2.innerText = "Time Remaining: " + count;
+    if (count === 0) {
+      clearInterval(timer);
     }
   }, 1000);
 }
-function adjustTime(amount) {
-  timeLeft += amount;
-  if (timeleft < 0) {
-    timeleft = 0;
-  }
-  timerEl.textContent = "Time remaining: " + timeLeft + "s";
-}
 
-// a timer starts and I am presented with a question
-clickStart.onclick = timer;
+// Questions are rendered
+clickStart.onclick = startCountDown;
 var renderQuestion = function (question) {
   questionContainer.innerHTML = "";
 
@@ -108,9 +110,7 @@ var renderQuestion = function (question) {
   questionContainer.appendChild(AnswerD);
 };
 
-/// When I answer the question
-// I am presented with another question
-
+// Correct or Incorrect
 var currentQuestionIndex = 0;
 var userScore = 0;
 var correctAnswer = questions[currentQuestionIndex].correct;
@@ -122,7 +122,6 @@ var answerClick = function (event) {
   correctAnswer = questions[currentQuestionIndex].correct;
   //   console.log("userAnswer", userAnswer);
 
-  //   correct / incorrect
   var answerDetermination = document.querySelector("#answer-determination");
   //   console.log(correctAnswer);
   if (userAnswer !== correctAnswer) {
@@ -146,6 +145,8 @@ var answerClick = function (event) {
     }
   }
 };
+
+// high scores
 
 var quiz = function (event) {
   event.preventDefault();
@@ -171,6 +172,7 @@ clickViewScores.addEventListener("click", () => {
   highScores();
 });
 
+// entering initials
 var initials;
 function endQuizPage() {
   resetDisplay();
@@ -209,14 +211,14 @@ function endQuizPage() {
     });
   });
 
-  if (initialInput === "") {
-    var nullInitial = document.createElement("p");
-    nullInitial.textContent = "Please enter your initials";
-    return false;
-  } else {
-    displayMessage("saved", "saved successfully");
-  }
-  initialBox.reset();
+  //   if (initialInput === "") {
+  //     var nullInitial = document.createElement("p");
+  //     nullInitial.textContent = "Please enter your initials";
+  //     return false;
+  //   } else {
+  //     displayMessage("saved", "saved successfully");
+  //   }
+  //   initialBox.reset();
   document.querySelector("input").value = "";
 
   initialBox.addEventListener("submt", endQuizPage);
