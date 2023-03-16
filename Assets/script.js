@@ -49,25 +49,6 @@ var h2 = document.querySelector("h2");
 var quizDuration;
 var questionContainer = document.querySelector("#quiz-container");
 
-// a timer is presented
-// function timer() {
-//   timerEl.textContent = "Time remaining: " + timeLeft + "s";
-//   quizDuration = setInterval(function () {
-//     if (timeLeft > 0) {
-//       adjustTime(-1);
-//     } else {
-//       endQuizPage();
-//     }
-//   }, 1000);
-// }
-// function adjustTime(amount) {
-//   timeLeft += amount;
-//   if (timeleft < 0) {
-//     timeleft = 0;
-//   }
-//   timerEl.textContent = "Time remaining: " + timeLeft + "s";
-// }
-
 // timer starts when I click "start quiz"
 function startCountDown() {
   var timer = setInterval(function () {
@@ -75,6 +56,7 @@ function startCountDown() {
     h2.innerText = "Time Remaining: " + count;
     if (count === 0) {
       clearInterval(timer);
+      endQuizPage();
     }
   }, 1000);
 }
@@ -103,11 +85,11 @@ var renderQuestion = function (question) {
   answerD.textContent = question.d;
   answerD.addEventListener("click", answerClick);
 
-  questionContainer.appendChiild(questionHeader);
-  questionContainer.appendChild(AnswerA);
-  questionContainer.appendChild(AnswerB);
-  questionContainer.appendChild(AnswerC);
-  questionContainer.appendChild(AnswerD);
+  questionContainer.appendChild(questionHeader);
+  questionContainer.appendChild(answerA);
+  questionContainer.appendChild(answerB);
+  questionContainer.appendChild(answerC);
+  questionContainer.appendChild(answerD);
 };
 
 // Correct or Incorrect
@@ -125,7 +107,7 @@ var answerClick = function (event) {
   var answerDetermination = document.querySelector("#answer-determination");
   //   console.log(correctAnswer);
   if (userAnswer !== correctAnswer) {
-    adjustTime(-10);
+    count -= 10;
     answerDetermination.textContent = "Incorrect";
     currentQuestionIndex++;
     if (currentQuestionIndex >= questions.length) {
@@ -160,7 +142,7 @@ function resetDisplay() {
 }
 
 function highScores() {
-  let data = localStorage.getItem("object");
+  let data = localStorage.getItem("initials");
   let getData = JSON.parse(data);
   let name = getData.name;
   let score = getData.score;
@@ -181,7 +163,7 @@ function endQuizPage() {
   var endPage = document.createElement("h2");
   questionContainer.appendChild(endPage);
 
-  let blank = doument.querySelector("#answer-determination");
+  let blank = document.querySelector("#answer-determination");
   blank.innerHTML = "";
 
   endPage.innerHTML =
@@ -189,22 +171,23 @@ function endQuizPage() {
     userScore +
     ". Enter you initials to save score.";
 
-  var intialBox = document.createElement("input");
-  blank.appendChiild(initialBox);
+  var initialBox = document.createElement("input");
+  blank.appendChild(initialBox);
 
-  var submitIntialBtn = document.createElement("button");
-  submitIntialBtn.textContent = "Submit";
-  blank.appendChiild(submitInitialBtn);
+  var submitInitialBtn = document.createElement("button");
+  submitInitialBtn.textContent = "Submit";
+  blank.appendChild(submitInitialBtn);
 
   submitInitialBtn.addEventListener("click", () => {
-    if (initialBox.value.length === 0) return false;
+    if (initialBox.value.length === 0) return alert("Please enter initials");
     let storeInitials = (...input) => {
       let data = JSON.stringify({ name: input[0], score: input[1] });
+      localStorage.setItem("initials", data);
     };
     storeInitials(initialBox.value, userScore);
     var playAgain = document.createElement("button");
     playAgain.textContent = "Play Again";
-    blank.appendChiild(playAgain);
+    blank.appendChild(playAgain);
 
     playAgain.addEventListener("click", () => {
       location.reload();
