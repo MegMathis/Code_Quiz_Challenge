@@ -128,8 +128,7 @@ var answerClick = function (event) {
   }
 };
 
-// high scores
-
+// Scoring
 var quiz = function (event) {
   event.preventDefault();
   resetDisplay();
@@ -141,6 +140,7 @@ function resetDisplay() {
   document.querySelector("#intro-page").style.display = "none";
 }
 
+// High Score
 function highScores() {
   let data = localStorage.getItem("initials");
   let getData = JSON.parse(data);
@@ -194,14 +194,6 @@ function endQuizPage() {
     });
   });
 
-  //   if (initialInput === "") {
-  //     var nullInitial = document.createElement("p");
-  //     nullInitial.textContent = "Please enter your initials";
-  //     return false;
-  //   } else {
-  //     displayMessage("saved", "saved successfully");
-  //   }
-  //   initialBox.reset();
   document.querySelector("input").value = "";
 
   initialBox.addEventListener("submt", endQuizPage);
