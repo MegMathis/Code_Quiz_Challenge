@@ -25,3 +25,27 @@ N/A
 ![View_High_Scores.](./Assets/Images/view_high_scores.png)
 
 ## Link to Deployment
+
+https://megmathis.github.io/Code_Quiz_Challenge/
+
+## Credits
+
+https://www.educba.com/textcontent-in-javascript/
+
+https://developer.mozilla.org/en-US/docs/Web/API/Element/innerHTML
+
+https://developer.mozilla.org/en-US/docs/Web/API/Event/preventDefault
+
+https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/parse
+
+https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify
+
+https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage
+
+https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/from
+
+https://css-tricks.com/almanac/selectors/a/after-and-before/
+
+## License
+
+Please refer to LICENSE in repo.

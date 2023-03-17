@@ -25,7 +25,7 @@ var questions = [
     correct: "d. All of the above",
   },
   {
-    q: "String values must be encosed within ____________ when being assigned to variables.",
+    q: "String values must be enclosed within ____________ when being assigned to variables.",
     a: "a. Quotes",
     b: "b. Curly brackets",
     c: "c. Parentheses",
