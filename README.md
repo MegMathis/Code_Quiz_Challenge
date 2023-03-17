@@ -2,7 +2,7 @@
 
 ## Description
 
-This is a multiple choice test to assess the user's basic knowledge of developement. The quiz utilizes HTML, JavaScript, and CSS. The user is presented with a muliple choice quiz and must answer all questions within a certain amount of time. If the user answers a question correct, then they are presented with the next question. If the user answers the question wrong, ten seconds is deducted from the timer. At the end of the quiz the user enters their initials.
+This is a multiple choice test to assess the user's basic knowledge of development. The quiz utilizes HTML, JavaScript, and CSS. The user is presented with a muliple choice quiz and must answer all questions within a certain amount of time. If the user answers a question correct, then they are presented with the next question. If the user answers the question wrong, ten seconds is deducted from the timer. At the end of the quiz the user enters their initials.
 
 ## Installation
 
